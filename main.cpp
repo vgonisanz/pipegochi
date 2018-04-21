@@ -17,13 +17,9 @@
 #include <avr/interrupt.h>
 #include <util/atomic.h>
 
-/* THIS NOT WORK RIGHT NOW */
-ISR(TIMER1_CAPT_vect, ISR_NAKED)
-{
-    LOGD("TIMER1_CAPT_vect");
-    system_tick();
-    reti(); /* Last ISR_NAKED routine cmd */
-}
+#include "tamagochi.h"
+
+Tamagochi puppy;
 
 /*
  * Interrupt each 1 Hz set at initialize_interrupts.
@@ -34,7 +30,6 @@ ISR(TIMER1_CAPT_vect, ISR_NAKED)
  */
 ISR(TIMER1_COMPA_vect, ISR_NAKED)
 {
-    //LOGD("TIMER1_COMPA_vect");
     system_tick();  /* Update system tick with an interrupt with 1 Hz, feeding time */
     reti(); /* Last ISR_NAKED routine cmd */
 }
@@ -65,6 +60,7 @@ static void infinite_loop()
         LOGD("loop");
         _delay_ms(1000);
         led::turn_switch();
+        puppy.update();
     }
 }
 
