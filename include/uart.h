@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __UART_H
+#define __UART_H
 
 #include "Arduino.h"
 
@@ -13,3 +14,5 @@ int uart_putchar(char c, FILE *stream);
  * the logs to be printed into UART.
  */
 void configure_uart(int32_t rate);
+
+#endif /* __UART_H */

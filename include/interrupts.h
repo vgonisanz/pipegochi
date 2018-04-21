@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __INTERRUPTS_H
+#define __INTERRUPTS_H
 
 #include "Arduino.h"
 
@@ -9,3 +10,5 @@
  * https://www.nongnu.org/avr-libc/user-manual/group__avr__interrupts.html
  */
 void initialize_interrupts();
+
+#endif /* __INTERRUPTS_H */

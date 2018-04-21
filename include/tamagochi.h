@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __TAMAGOCHI_H
+#define __TAMAGOCHI_H
 
 class Tamagochi
 {
@@ -8,3 +9,5 @@ public:
 
     void update();
 };
+
+#endif /* __TAMAGOCHI_H */

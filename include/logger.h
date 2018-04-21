@@ -1,20 +1,23 @@
-#pragma once
+#ifndef __LOGGER_H
+#define __LOGGER_H
 
 #include "Arduino.h"
 extern FILE uartout;
-
-/* UART is needed to send the logger info */
-//#include "uart.h"
 
 /*
  * LOG Header to ease printing with style.
  *
  * Log levels: ___LOG_DEBUG, ___LOG_INFO, ___LOG_VERBOSE, ___LOG_WARNING, ___LOG_ERROR
- * Only one log level shall be defined, at least once, before including "logger.h"
- * Each cpp shall define LOG_TAG in order to print a reference.
- * No define LOG_TAG in a header!
+ *
+ * No define LOG_TAG or __LOG_<LEVEL> in a header!
+ * Each cpp shall define before including "logger.h":
+ *      1º LOG_TAG in order to print a reference.
+ *      2º __LOG_<LEVEL> in order to send to stdout the wanted logs.
+ *
  *      I.e:    #define LOG_TAG "main"
+ *              or:
  *              #define LOG_TAG __FILE__
+ *
  * Each level print it self and the rest until the end of the line.
  *      I.e:    ___LOG_DEBUG : Print everything, ___LOG_ERROR : Only errors.
  *
@@ -31,11 +34,10 @@ extern FILE uartout;
 #if defined(___LOG_DEBUG) || defined(___LOG_INFO) || defined(___LOG_VERBOSE) || defined(___LOG_WARNING) || defined(___LOG_ERROR)
 #   include <stdio.h>
 #   include <time.h>
-#   include <util/eu_dst.h>
     /* Be careful with multithreading!!! */
-    char buff[100];
-    struct tm *sTm;
-    time_t now;
+    static char buff[100];
+    static struct tm *sTm;
+    static time_t now;
 
 #   define PRINT_TIME {now = time(0); sTm = localtime(&now); strftime(buff, sizeof(buff), "[%Y-%m-%d %H:%M:%S]", sTm); fprintf(&uartout, "%s ", buff); }
 #endif
@@ -71,3 +73,5 @@ extern FILE uartout;
 #   undef LOGD
 #	define LOGD(...) {PRINT_TIME fprintf(&uartout, "[D][%s] ", LOG_TAG); fprintf(&uartout, __VA_ARGS__); fprintf(&uartout, "\n");}
 #endif
+
+#endif /* __LOGGER_H */

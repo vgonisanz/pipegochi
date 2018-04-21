@@ -1,5 +1,6 @@
 #include "tamagochi.h"
 
+#define ___LOG_DEBUG
 #define LOG_TAG "tamagochi"
 #include "logger.h"
 
@@ -15,6 +16,5 @@ Tamagochi::~Tamagochi()
 
 void Tamagochi::update()
 {
-    LOGD("Tamagochi update"); /* No work check why */
-    Serial.println("update");
+    LOGD("Tamagochi update");
 }

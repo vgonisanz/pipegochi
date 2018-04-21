@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __CLOCK_H
+#define __CLOCK_H
 
 #include "Arduino.h"
 #include <time.h>
@@ -14,3 +15,5 @@
 void initialize_time(int32_t zone, time_t timestamp);
 
 void print_compile_date();
+
+#endif /* __CLOCK_H */
