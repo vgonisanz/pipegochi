@@ -1,7 +1,8 @@
 #ifndef __LOGGER_H
 #define __LOGGER_H
 
-#include "Arduino.h"
+#include "config.h"
+
 extern FILE uartout;
 
 /*
@@ -13,6 +14,7 @@ extern FILE uartout;
  * Each cpp shall define before including "logger.h":
  *      1º LOG_TAG in order to print a reference.
  *      2º __LOG_<LEVEL> in order to send to stdout the wanted logs.
+ *      Note: You can define it in a header to avoid use it several cpps.
  *
  *      I.e:    #define LOG_TAG "main"
  *              or:

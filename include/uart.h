@@ -1,7 +1,7 @@
 #ifndef __UART_H
 #define __UART_H
 
-#include "Arduino.h"
+#include "config.h"
 
 /*
  * uart_putchar: char output function for printf

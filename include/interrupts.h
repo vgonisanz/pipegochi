@@ -1,7 +1,7 @@
 #ifndef __INTERRUPTS_H
 #define __INTERRUPTS_H
 
-#include "Arduino.h"
+#include "config.h"
 
 /*
  * Initialize interrupts for date/time using timer 1 at 1 Hz

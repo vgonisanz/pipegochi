@@ -1,7 +1,7 @@
 #ifndef __CLOCK_H
 #define __CLOCK_H
 
-#include "Arduino.h"
+#include "config.h"
 #include <time.h>
 
 /*

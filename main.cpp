@@ -1,14 +1,5 @@
-#if ARDUINO >= 100
-    #include "Arduino.h"
-#else
-    #include "WProgram.h"
-#endif
+#include "config.h"
 
-#include <util/delay.h>
-#include <stdio.h>
-
-/* Allow this level of LOGs & identify main with LOG_TAG */
-#define ___LOG_DEBUG
 #define LOG_TAG "main"
 #include "logger.h"
 

@@ -1,6 +1,5 @@
 #include "tamagochi.h"
 
-#define ___LOG_DEBUG
 #define LOG_TAG "tamagochi"
 #include "logger.h"
 
