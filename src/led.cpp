@@ -4,7 +4,7 @@
 namespace led
 {
 
-const int LED_ID = LED_BUILTIN;
+const int32_t LED_ID = LED_BUILTIN;
 
 void initialize()
 {
