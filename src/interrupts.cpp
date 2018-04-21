@@ -1,6 +1,7 @@
 #include "interrupts.h"
 
 #include <avr/interrupt.h>
+#include <time.h>           /* Required for system_tick */
 
 /*
  * Interrupt each 1 Hz set at initialize_interrupts.
@@ -32,12 +33,4 @@ void initialize_interrupts()
     TIMSK1 |= (1 << OCIE1A);    /* Enable timer compare interrupt */
 
     sei();  /* set Global Interrupt Enable */
-}
-
-void initialize_time(int32_t zone, time_t timestamp)
-{
-    //LOGD("Date: %d, Time: %d", __DATE__, __TIME__); /* Compile time */
-    set_zone(0);
-    //set_dst();
-    set_system_time(0);
 }
