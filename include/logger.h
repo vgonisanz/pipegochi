@@ -33,9 +33,9 @@ extern FILE uartout;
 #   include <time.h>
 #   include <util/eu_dst.h>
     /* Be careful with multithreading!!! */
-    static char buff[100];
-    static struct tm *sTm;
-    static time_t now;
+    char buff[100];
+    struct tm *sTm;
+    time_t now;
 
 #   define PRINT_TIME {now = time(0); sTm = localtime(&now); strftime(buff, sizeof(buff), "[%Y-%m-%d %H:%M:%S]", sTm); fprintf(&uartout, "%s ", buff); }
 #endif
