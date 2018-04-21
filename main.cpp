@@ -9,9 +9,10 @@
 
 /* Allow this level of LOGs & identify main with LOG_TAG */
 #define ___LOG_DEBUG
-#include "include/logger.h"
 #define LOG_TAG "main"
+#include "logger.h"
 
+#include "uart.h"
 #include "interrupts.h"
 #include "clock.h"
 #include "led.h"
@@ -33,8 +34,9 @@ static void infinite_loop()
 /* Entry point: Always called first */
 void setup()
 {
+    configure_uart(9600);       /* First to do, force initialize UART before using LOGS in logger!!! */
+    print_compile_date();       /* NO PRINT TODO problem with logger file parse */
     LOGI("Configuring app...");
-    configure_uart(9600);       /* Force initialize UART before using LOGS in logger!!! */
     initialize_time(0, 0);
     initialize_interrupts();    /* Set up time running */
 

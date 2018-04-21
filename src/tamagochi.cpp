@@ -15,6 +15,6 @@ Tamagochi::~Tamagochi()
 
 void Tamagochi::update()
 {
-    //LOGD("update"); /* No work check why */
+    LOGD("Tamagochi update"); /* No work check why */
     Serial.println("update");
 }

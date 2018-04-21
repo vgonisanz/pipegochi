@@ -1,7 +1,9 @@
 #pragma once
 
+#include "Arduino.h"
+extern FILE uartout;
 /* UART is needed to send the logger info */
-#include "uart.h"
+//#include "uart.h"
 
 /*
  * LOG Header to ease printing with style.
@@ -23,7 +25,6 @@
 #pragma message("logger.h included without define LOG_TAG before!")
 #endif
 
-extern FILE uartout;
 
 /* Initialize logger */
 #if defined(___LOG_DEBUG) || defined(___LOG_INFO) || defined(___LOG_VERBOSE) || defined(___LOG_WARNING) || defined(___LOG_ERROR)
@@ -35,7 +36,7 @@ extern FILE uartout;
     static struct tm *sTm;
     static time_t now;
 
-#   define PRINT_TIME {now = time(0); sTm = localtime(&now); strftime(buff, sizeof(buff), "[%Y-%m-%d %H:%M:%S]", sTm); fprintf(&uartout, "%s ", buff); }
+#   define PRINT_TIME {now = time(0); sTm = localtime(&now); strftime(buff, sizeof(buff), "[%Y-%m-%d %H:%M:%S]", sTm); fprintf(stdout, "%s ", buff); }
 #endif
 
 /* Define all logs as empty, they will be undef if no needed depending log level */
@@ -47,25 +48,25 @@ extern FILE uartout;
 
 #if defined(___LOG_DEBUG) || defined(___LOG_INFO) || defined(___LOG_VERBOSE) || defined(___LOG_WARNING) || defined(___LOG_ERROR)
 #   undef LOGE
-#   define LOGE(...) {PRINT_TIME fprintf(&uartout, "[E][%s] ", LOG_TAG); fprintf(&uartout, __VA_ARGS__); fprintf(&uartout, "\n");}
+#   define LOGE(...) {PRINT_TIME fprintf(stdout, "[E][%s] ", LOG_TAG); fprintf(stdout, __VA_ARGS__); fprintf(stdout, "\n");}
 #endif
 
 #if defined(___LOG_DEBUG) || defined(___LOG_INFO) || defined(___LOG_VERBOSE) || defined(___LOG_WARNING)
 #   undef LOGW
-#   define LOGW(...) {PRINT_TIME fprintf(&uartout, "[W][%s] ", LOG_TAG); fprintf(&uartout, __VA_ARGS__); fprintf(&uartout, "\n");}
+#   define LOGW(...) {PRINT_TIME fprintf(stdout, "[W][%s] ", LOG_TAG); fprintf(stdout, __VA_ARGS__); fprintf(stdout, "\n");}
 #endif
 
 #if defined(___LOG_DEBUG) || defined(___LOG_INFO) || defined(___LOG_VERBOSE)
 #   undef LOGV
-#	define LOGV(...) {PRINT_TIME fprintf(&uartout, "[V][%s] ", LOG_TAG); fprintf(&uartout, __VA_ARGS__); fprintf(&uartout, "\n");}
+#	define LOGV(...) {PRINT_TIME fprintf(stdout, "[V][%s] ", LOG_TAG); fprintf(stdout, __VA_ARGS__); fprintf(stdout, "\n");}
 #endif
 
 #if defined(___LOG_DEBUG) || defined(___LOG_INFO)
 #   undef LOGI
-#	define LOGI(...) {PRINT_TIME fprintf(&uartout, "[I][%s] ", LOG_TAG); fprintf(&uartout, __VA_ARGS__); fprintf(&uartout, "\n");}
+#	define LOGI(...) {PRINT_TIME fprintf(stdout, "[I][%s] ", LOG_TAG); fprintf(stdout, __VA_ARGS__); fprintf(stdout, "\n");}
 #endif
 
 #if defined(___LOG_DEBUG)
 #   undef LOGD
-#	define LOGD(...) {PRINT_TIME fprintf(&uartout, "[D][%s] ", LOG_TAG); fprintf(&uartout, __VA_ARGS__); fprintf(&uartout, "\n");}
+#	define LOGD(...) {PRINT_TIME fprintf(stdout, "[D][%s] ", LOG_TAG); fprintf(stdout, __VA_ARGS__); fprintf(stdout, "\n");}
 #endif

@@ -12,3 +12,5 @@
  * http://www.nongnu.org/avr-libc/user-manual/group__avr__time.html
  */
 void initialize_time(int32_t zone, time_t timestamp);
+
+void print_compile_date();
