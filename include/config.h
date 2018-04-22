@@ -15,6 +15,13 @@
 #endif
 
 /*
+ * VERSION
+ */
+#define __VERSION_MAJOR 0
+#define __VERSION_MINOR 1
+#define __VERSION_SUB_MINOR 0
+
+/*
  * Define log level
  * The logger.h cannot determine the user desire log level
  * You have to specify before include it.
@@ -27,5 +34,9 @@
  * You have to specify it in the header file.
  */
 //#define SSD1306_128_64
+
+/* Tamagochi parameters */
+#define APP_SLEEP_PERIOD_IN_MS 500
+#define TAMAGOCHI_UPDATE_IN_S 5
 
 #endif /* __CONFIG_H */
