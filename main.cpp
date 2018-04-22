@@ -18,7 +18,7 @@ static void infinite_loop()
         LOGD("loop iteration");
         _delay_ms(1000);
         led::turn_switch();
-        puppy.update();
+        puppy.printStatus();
     }
 }
 
