@@ -45,11 +45,12 @@ extern FILE uartout;
 #endif
 
 /* Define all logs as empty, they will be undef if no needed depending log level */
-#  define LOGV(...)
-#  define LOGD(...)
-#  define LOGI(...)
-#  define LOGW(...)
-#  define LOGE(...)
+#define LOGV(...)
+#define LOGD(...)
+#define LOGI(...)
+#define LOGW(...)
+#define LOGE(...)
+#define LOGR(...)   /* Raw print, without TIME prefix, at info level */
 
 #if defined(___LOG_DEBUG) || defined(___LOG_INFO) || defined(___LOG_VERBOSE) || defined(___LOG_WARNING) || defined(___LOG_ERROR)
 #   undef LOGE
@@ -69,6 +70,8 @@ extern FILE uartout;
 #if defined(___LOG_DEBUG) || defined(___LOG_INFO)
 #   undef LOGI
 #	define LOGI(...) {PRINT_TIME fprintf(&uartout, "[I][%s] ", LOG_TAG); fprintf(&uartout, __VA_ARGS__); fprintf(&uartout, "\n");}
+#   undef LOGR
+#   define LOGR(...) {fprintf(&uartout, __VA_ARGS__); fprintf(&uartout, "\n");}
 #endif
 
 #if defined(___LOG_DEBUG)
