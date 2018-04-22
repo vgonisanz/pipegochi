@@ -10,6 +10,7 @@
 #include "tamagochi.h"
 
 Tamagochi puppy;
+Clock userClock;
 
 static void print_version()
 {
@@ -33,10 +34,10 @@ void setup()
 
     configure_uart(9600);       /* First to do, force initialize UART before using LOGS in logger!!! */
     print_version();
-    print_compile_date();       /* NO PRINT TODO problem with logger file parse */
+    Clock::printCompileDate();       /* NO PRINT TODO problem with logger file parse */
 
     LOGI("Configuring app...");
-    initialize_time(0, 0);
+    userClock.setTime(0, 0);
     initialize_interrupts();    /* Set up time running */
 
     led::turn_off();
