@@ -46,9 +46,7 @@ void Tamagochi::update()
 {
     if(isNeededToUpdate())
     {
-        _status.hunger -= 1;
-        _status.happiness -= 1;
-        _status.discipline -= 1;
+        updateHunger();
         updateHealth();
         updateHappiness();
         updateDiscipline();
@@ -64,19 +62,34 @@ bool Tamagochi::isNeededToUpdate()
     return (difference > _config.updatePeriod);
 }
 
-void Tamagochi::updateHealth()
+void Tamagochi::updateHunger()
 {
-
-}
-
-void Tamagochi::updateHappiness()
-{
-
+    _status.hunger -= 1;
 }
 
 void Tamagochi::updateDiscipline()
 {
+    _status.discipline -= 1;
+}
 
+void Tamagochi::updateHealth()
+{
+    uint32_t minutesWithoutPlay = 0; /* TODO */
+    uint32_t playFactor = minutesWithoutPlay * 10;
+    uint32_t poopFactor = _status.poops * 10;
+    _status.health = _status.health - playFactor - poopFactor;
+}
+
+void Tamagochi::updateHappiness()
+{
+    _status.happiness -= 1;
+}
+
+void Tamagochi::updateState()
+{
+    /* Too much poops? go sick */
+
+    /* Time to sleep/wake up? */
 }
 
 void Tamagochi::setLastUpdate()
