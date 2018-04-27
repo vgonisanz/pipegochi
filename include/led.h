@@ -1,4 +1,7 @@
-#pragma once
+#ifndef __LED_H
+#define __LED_H
+
+#include "config.h"
 
 namespace led
 {
@@ -16,3 +19,5 @@ void turn_off();
 void turn_switch();
 
 } /* namespace led */
+
+#endif /* __LED_H */

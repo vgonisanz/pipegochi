@@ -1,45 +1,28 @@
-#if ARDUINO >= 100
-    #include "Arduino.h"
-#else
-    #include "WProgram.h"
-#endif
+#include "config.h"
 
-#include <util/delay.h>
-#include <stdio.h>
-
-/* Allow this level of LOGs & identify main with LOG_TAG */
-#define ___LOG_DEBUG
-#include "include/logger.h"
 #define LOG_TAG "main"
+#include "logger.h"
 
+#include "uart.h"
+#include "interrupts.h"
+#include "clock.h"
 #include "led.h"
+#include "tamagochi.h"
 
-static void print_date()
-{
-    time_t rightnow = time(0);
-    struct tm *is_now = localtime(&rightnow);
-    LOGD("Data: %d", rightnow);
-}
+Tamagochi puppy;
+Clock userClock;
 
-/*
- * Mmmmh, something doesn't update time
- * http://www.nongnu.org/avr-libc/user-manual/group__avr__time.html
- */
-static void initialize_time()
+static void print_version()
 {
-    set_zone(0);
-    //set_dst();
-    set_system_time(0);
+    LOGI("Version: %d.%d.%d", __VERSION_MAJOR, __VERSION_MINOR, __VERSION_SUB_MINOR);
 }
 
 static void infinite_loop()
 {
     while(true)
     {
-        LOGD("loop");
-        _delay_ms(1000);
-        led::turn_switch();
-        print_date();
+        puppy.update(); /* Try to update */
+        _delay_ms(APP_SLEEP_PERIOD_IN_MS);
     }
 }
 
@@ -48,14 +31,21 @@ void setup()
 {
     led::initialize();
     led::turn_on();
-    configure_uart();       /* Force initialize UART before using LOGS in logger!!! */
-    _delay_ms(500);
-    LOGD("setup Aw right");
+
+    configure_uart(9600);       /* First to do, force initialize UART before using LOGS in logger!!! */
+    print_version();
+    Clock::printCompileDate();       /* NO PRINT TODO problem with logger file parse */
+
+    LOGI("Configuring app...");
+    userClock.setTime(0, 0);
+    initialize_interrupts();    /* Set up time running */
+
     led::turn_off();
 }
 
 /* Post setup function */
 void loop()
 {
+    LOGI("Start working!");
     infinite_loop();
 }
