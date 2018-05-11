@@ -9,13 +9,18 @@ Tamagochi clone for Arduino. Tested on Arduino pro mini (atmega328p with 16 MHz)
 Several submodules are used:
 
 * **arduino-cmake**: To compile the source code.
-* **GLCD-BitmapConverter**: To convert bitmaps to c arrays automatically using python scripts.
-* **Wire**: Arduino library that allows you to communicate with I2C and Two Wire Interface devices.
 * **U8glib**: To manage SSD1306 device and basic draw operations.
 * **Adafruit_GFX/SSD1306**: This is used only for one example. Read SSD1306 section to have more info.
+* **GLCD-BitmapConverter**: To convert bitmaps to c arrays automatically using python scripts.
+
+*NOTE*: I recommend to clone with ```--recursive``` option to get all submodules automatically.
+
+Arduino standards libraries are added directly with a working version:
+
+* **Wire**: Arduino library that allows you to communicate with I2C and Two Wire Interface devices.
 * **SPI**: This is required by Adafruit_GFX for some model. Not really required in this project. Sorry for overhead.
 
-I recommend to clone with ```--recursive``` option to get all submodules automatically.
+*NOTE*: I added directly because I didn't find a repository to add as a submodule and I didn't want manual dependencies.
 
 ## CMake compilation
 
@@ -35,9 +40,10 @@ Clone into your compiler a valid [arduino-cmake](https://github.com/arduino-cmak
 
 ## Arduino libraries
 
-### Submodule way
+### Submodule way & direct way
 
-I have added as submodules all required arduino libraries at ```3rdParty/arduino```.
+* I have added as submodules all required drivers and library dependencies at ```3rdParty/arduino```.
+* I have added arduino standard libraries dependencies at ```3rdParty/arduino``` directly.
 
 ### Default way
 
@@ -55,12 +61,12 @@ cmake -DINPUT_BOARD=pro -DINPUT_PORT=/dev/ttyUSB0 -DINPUT_SERIAL=minicom -DBOARD
 make
 ```
 
-Other tested boards:
+Other tested boards, in example, nano:
 ```
 cmake -DINPUT_BOARD=nano -DINPUT_PORT=/dev/ttyUSB0 -DINPUT_SERIAL=minicom -DBOARD_CPU=atmega328 ..
 ```
 
-Add CMAKE_TOOLCHAIN_FILE if required:
+If you want to customize CMAKE_TOOLCHAIN_FILE option, you can run:
 
 ```
 cmake -DCMAKE_TOOLCHAIN_FILE=../path/to/toolchain/file.cmake -DINPUT_BOARD=pro -DINPUT_PORT=/dev/ttyUSB0 -DINPUT_SERIAL=minicom -DBOARD_CPU=16MHzatmega328 ..

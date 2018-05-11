@@ -1,3 +1,12 @@
 [submodule "cmake/arduino-cmake"]
 	path = cmake/arduino-cmake
 	url = https://github.com/arduino-cmake/arduino-cmake.git
+[submodule "3rdParty/arduino/Adafruit_GFX"]
+	path = 3rdParty/arduino/Adafruit_GFX
+	url = git@github.com:adafruit/Adafruit-GFX-Library.git
+[submodule "3rdParty/arduino/Adafruit_SSD1306"]
+	path = 3rdParty/arduino/Adafruit_SSD1306
+	url = git@github.com:adafruit/Adafruit_SSD1306.git
+[submodule "3rdParty/arduino/U8glib"]
+	path = 3rdParty/arduino/U8glib
+	url = git@github.com:olikraus/U8glib_Arduino.git
