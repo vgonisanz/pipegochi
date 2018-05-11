@@ -18,7 +18,7 @@
  * VERSION
  */
 #define __VERSION_MAJOR 0
-#define __VERSION_MINOR 1
+#define __VERSION_MINOR 2
 #define __VERSION_SUB_MINOR 0
 
 /*
