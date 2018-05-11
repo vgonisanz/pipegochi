@@ -12,6 +12,8 @@ Several submodules are used:
 * **GLCD-BitmapConverter**: To convert bitmaps to c arrays automatically using python scripts.
 * **Wire**: Arduino library that allows you to communicate with I2C and Two Wire Interface devices.
 * **U8glib**: To manage SSD1306 device and basic draw operations.
+* **Adafruit_GFX/SSD1306**: This is used only for one example. Read SSD1306 section to have more info.
+* **SPI**: This is required by Adafruit_GFX for some model. Not really required in this project. Sorry for overhead.
 
 I recommend to clone with ```--recursive``` option to get all submodules automatically.
 
@@ -44,9 +46,9 @@ I don't use this way, but you have here some info.
 * *Official reference:* For information on installing libraries, see: http://www.arduino.cc/en/Guide/Libraries.
 * *Summary*: By default uncompress both zips and rename removing suffix into ```${USER_ARDUINO_PATH}/arduino/libraries``` path. Opening arduino IDE will found it on Examples > Custom examples.
 
-# Compile
+# How to compile Compile
 
-To compile the code just:
+Assuming you are using all submodules, to compile the code run the following commands:
 ```
 mkdir build && cd build
 cmake -DINPUT_BOARD=pro -DINPUT_PORT=/dev/ttyUSB0 -DINPUT_SERIAL=minicom -DBOARD_CPU=16MHzatmega328 ..
@@ -57,19 +59,23 @@ Other tested boards:
 ```
 cmake -DINPUT_BOARD=nano -DINPUT_PORT=/dev/ttyUSB0 -DINPUT_SERIAL=minicom -DBOARD_CPU=atmega328 ..
 ```
+
 Add CMAKE_TOOLCHAIN_FILE if required:
 
 ```
 cmake -DCMAKE_TOOLCHAIN_FILE=../path/to/toolchain/file.cmake -DINPUT_BOARD=pro -DINPUT_PORT=/dev/ttyUSB0 -DINPUT_SERIAL=minicom -DBOARD_CPU=16MHzatmega328 ..
 ```
 
-# Upload
+If you don't use submodules, please, install dependencies in arduino path before compiling!
+
+# How to Upload into your device
 
 1. Push reset button.
 1. Release reset button.
-1. Execute immediately ```make upload```
+1. Execute immediately ```make ${project}-upload```
 
 * *NOTE*: Don't launch manually minicom if you want to upload a firmware image, because it will block the device and the image cannot be upload.
+* *NOTE II*: ```make upload``` will try to upload all images. The device cannot get all :-)
 
 # Use UART
 
@@ -93,12 +99,17 @@ sudo minicom -D /dev/ttyUSB0 -b 9600
 
 * *NOTE*: Disconnect it before upload a new firmware.
 
-# SS1306
+# SSD1306
 
 SSD1306 chip have a driver to communicate in multiple ways including I2C, SPI and 8-bit parallel. In Dependencies section you can find a link to the source code.
 Also, you can find more info about management at ```references/monochrome-oled-breakouts.pdf``` and into the datasheet ```references/SSD1306.pdf```.
 
 * [ONLINE Device installation tutorial](https://learn.adafruit.com/monochrome-oled-breakouts)
+
+Exist several libraries to draw in this model:
+* **Adafruit_SSD1306 + Adafruit_GFX**: I made a sample with this library, but it is too heavy for arduino pro mini. So I decided to avoid use it. Anyway, the sample
+is into ```sample/display``` to be compiled and tested.
+* **U8glib**: Simple and light.
 
 ## How create bitmaps
 
