@@ -10,3 +10,6 @@
 [submodule "3rdParty/arduino/U8glib"]
 	path = 3rdParty/arduino/U8glib
 	url = git@github.com:olikraus/U8glib_Arduino.git
+[submodule "3rdParty/python/GLCD-BitmapConverter"]
+	path = 3rdParty/python/GLCD-BitmapConverter
+	url = git@github.com:vgonisanz/GLCD-BitmapConverter.git
