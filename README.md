@@ -32,6 +32,10 @@ cmake -DINPUT_BOARD=pro -DINPUT_PORT=/dev/ttyUSB0 -DINPUT_SERIAL=minicom -DBOARD
 make
 ```
 
+Other tested boards:
+```
+cmake -DINPUT_BOARD=nano -DINPUT_PORT=/dev/ttyUSB0 -DINPUT_SERIAL=minicom -DBOARD_CPU=atmega328 ..
+```
 Add CMAKE_TOOLCHAIN_FILE if required:
 
 ```
