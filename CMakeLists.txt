@@ -25,6 +25,9 @@ link_directories(${3RDPARTY_PATH})
 
 set(U8glib_RECURSE True) # U8glib have nested source code!
 
+# Generate assets
+#add_subdirectory(assets)
+
 # Pipegochi core
 add_subdirectory(pipegochi)
 
